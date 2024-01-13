@@ -1,0 +1,10 @@
+{
+    "short_name": "Vinyl Selector",
+    "name": "Vinyl Selector",
+    "id": "/",
+    "start_url": "/",
+    "background_color": "#0284c7",
+    "display": "standalone",
+    "theme_color": "#0284c7",
+    "description": "An app that generates a random vinyl from your Discogs collection."
+}
