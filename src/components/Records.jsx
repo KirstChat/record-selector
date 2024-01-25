@@ -22,7 +22,7 @@ const Records = () => {
      */
     const fetchRecords = async () => {
         const res = await axios.get(
-            `${api}/users/${userName}/collection/folders/${folderId}/releases?token=${token}&per_page=5`
+            `${api}/users/${userName}/collection/folders/${folderId}/releases?token=${token}&per_page=100`
         );
 
         return res.data;
