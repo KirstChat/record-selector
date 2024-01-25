@@ -60,7 +60,7 @@ const Records = () => {
         // Timeout function to add loader between records
         setTimeout(() => {
             setIsLoading(false);
-        }, 1000);
+        }, 1500);
     };
 
     /**
@@ -74,7 +74,7 @@ const Records = () => {
         // Timeout function to add loader between records
         setTimeout(() => {
             setIsLoading(false);
-        }, 1000);
+        }, 1500);
     };
 
     /**
