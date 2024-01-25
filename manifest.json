@@ -1,10 +1,28 @@
 {
-    "short_name": "Vinyl Selector",
-    "name": "Vinyl Selector",
+    "short_name": "Record Shuffler",
+    "name": "Record Shuffler",
+    "icons": [
+        {
+            "src": "icons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/maskable_icon.png",
+            "sizes": "720x720",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
     "id": "/",
     "start_url": "/",
-    "background_color": "#0284c7",
+    "background_color": "#111827",
     "display": "standalone",
-    "theme_color": "#0284c7",
-    "description": "An app that generates a random vinyl from your Discogs collection."
+    "theme_color": "#111827",
+    "description": "An app that shuffles your Discogs collection and then shows a record at random."
 }
