@@ -25,7 +25,7 @@ const Record = ({ record, isLoading }) => {
                 />
             </div>
 
-            <div className='h-24 w-full text-center py-4'>
+            <div className='text-center py-4 min-h-24 w-full'>
                 {isLoading ? (
                     <Fragment>
                         <h2 className='animate-pulse bg-slate-500 dark:bg-slate-700 rounded h-6 w-9/12 mx-auto mb-3'></h2>

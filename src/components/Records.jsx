@@ -22,7 +22,7 @@ const Records = () => {
      */
     const fetchRecords = async () => {
         const res = await axios.get(
-            `${api}/users/${userName}/collection/folders/${folderId}/releases?token=${token}&per_page=100`
+            `${api}/users/${userName}/collection/folders/${folderId}/releases?token=${token}&per_page=5`
         );
 
         return res.data;
@@ -60,7 +60,7 @@ const Records = () => {
         // Timeout function to add loader between records
         setTimeout(() => {
             setIsLoading(false);
-        }, 1500);
+        }, 1000);
     };
 
     /**
@@ -74,7 +74,7 @@ const Records = () => {
         // Timeout function to add loader between records
         setTimeout(() => {
             setIsLoading(false);
-        }, 1500);
+        }, 1000);
     };
 
     /**
@@ -88,13 +88,15 @@ const Records = () => {
 
     return (
         <Fragment>
-            <section className='font-mono text-center text-slate-900 dark:text-white mb-4'>
+            <section className='font-mono text-center text-slate-900 dark:text-white'>
                 {!isPending && !error && isFirstLoad && (
-                    <p>Not sure what to listen to? Click the button below!</p>
+                    <p className='mb-4'>
+                        Not sure what to listen to? Click the button below!
+                    </p>
                 )}
 
                 {records && records.length === 1 && (
-                    <p>
+                    <p className='mb-4'>
                         This is the last record in your collection. Time to
                         re-shuffle!
                     </p>
