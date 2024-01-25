@@ -9,6 +9,7 @@ const Records = () => {
     const [records, setRecords] = useState();
     const [randomRecord, setRandomRecord] = useState();
     const [isFirstLoad, setIsFirstLoad] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const userName = import.meta.env.VITE_DISCOGS_USER_NAME;
     const folderId = import.meta.env.VITE_DISCOGS_COLLECITON_FOLDER_ID;
@@ -54,6 +55,12 @@ const Records = () => {
     const randomRecordHandler = () => {
         setRandomRecord(shuffledRecords.shift());
         setIsFirstLoad(false);
+        setIsLoading(true);
+
+        // Timeout function to add loader between records
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
     };
 
     /**
@@ -62,6 +69,12 @@ const Records = () => {
     const resetRecordsHandler = () => {
         setRecords(structuredClone(data?.releases));
         setRandomRecord(shuffledRecords.shift());
+        setIsLoading(true);
+
+        // Timeout function to add loader between records
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
     };
 
     /**
@@ -102,8 +115,8 @@ const Records = () => {
                     </p>
                 )}
 
-                {!isPending && !error && (
-                    <Record record={randomRecord} isFirstLoad={isFirstLoad} />
+                {!isPending && !error && randomRecord && (
+                    <Record record={randomRecord} isLoading={isLoading} />
                 )}
 
                 <div className='flex justify-center gap-x-4'>
