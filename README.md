@@ -11,6 +11,5 @@ Currently, two official plugins are available:
 -   Discogs API - https://www.discogs.com/developers/
 -   React Query - https://tanstack.com/qusery/latest/docs/react/overview
 -   Shuffle an Array - https://javascript.info/array-methods#shuffle-an-array
--   Vinyl Icon from - https://icons8.com/
 -   CSS Loader - https://cssloaders.github.io/
 -   Favion Converter- https://favicon.io/favicon-converter/
