@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.text-xxs {
-    font-size: 10px;
-}
-
 .loader {
     border: 5px solid;
     border-color: #fff #fff transparent;

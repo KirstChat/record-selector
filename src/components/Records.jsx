@@ -5,18 +5,18 @@ import axios from 'axios';
 import Record from './Record';
 import Button from './Button';
 
+const userName = import.meta.env.VITE_DISCOGS_USER_NAME;
+const folderId = import.meta.env.VITE_DISCOGS_COLLECITON_FOLDER_ID;
+const token = import.meta.env.VITE_DISCOGS_USER_TOKEN;
+
 const Records = () => {
     const [records, setRecords] = useState();
     const [randomRecord, setRandomRecord] = useState();
     const [isFirstLoad, setIsFirstLoad] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
-    const userName = import.meta.env.VITE_DISCOGS_USER_NAME;
-    const folderId = import.meta.env.VITE_DISCOGS_COLLECITON_FOLDER_ID;
-    const token = import.meta.env.VITE_DISCOGS_USER_TOKEN;
-
     /**
-     * Fetch request to Discogs API
+     * Fetch records from Discogs API
      *
      * @returns data
      */
@@ -45,6 +45,7 @@ const Records = () => {
                 let j = Math.floor(Math.random() * (i + 1));
                 [records[i], records[j]] = [records[j], records[i]];
             }
+
             return records;
         }
     }, [records]);
@@ -68,13 +69,7 @@ const Records = () => {
      */
     const resetRecordsHandler = () => {
         setRecords(structuredClone(data?.releases));
-        setRandomRecord(shuffledRecords.shift());
-        setIsLoading(true);
-
-        // Timeout function to add loader between records
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
+        setIsFirstLoad(true);
     };
 
     /**
@@ -86,22 +81,18 @@ const Records = () => {
         setIsFirstLoad(true);
     }, [data]);
 
+    console.log('records:', records);
+
     return (
         <Fragment>
-            <section className='font-mono text-center text-slate-900 dark:text-white'>
-                {!isPending && !error && isFirstLoad && (
-                    <p className='mb-4'>
-                        Not sure what to listen to? Click the button below!
+            {!isFirstLoad && !isPending && records && (
+                <section className='font-mono text-center mb-4'>
+                    <p className='text-slate-900 dark:text-white'>
+                        {`${data?.releases?.length - records?.length} /
+                        ${data?.releases?.length}`}
                     </p>
-                )}
-
-                {records && records.length === 1 && (
-                    <p className='mb-4'>
-                        This is the last record in your collection. Time to
-                        re-shuffle!
-                    </p>
-                )}
-            </section>
+                </section>
+            )}
 
             <section className='w-full'>
                 {isPending && (
@@ -117,28 +108,26 @@ const Records = () => {
                     </p>
                 )}
 
-                {!isPending && !error && randomRecord && (
+                {!isPending && !error && !isFirstLoad && randomRecord && (
                     <Record record={randomRecord} isLoading={isLoading} />
                 )}
+            </section>
 
-                <div className='flex justify-center gap-x-4'>
-                    {records && records.length > 1 && (
-                        <Button
-                            label={
-                                isFirstLoad ? 'Shuffle Records' : 'Next Record'
-                            }
-                            clickHandler={randomRecordHandler}
-                            color='sky'
-                        />
-                    )}
-                    {records && records.length <= 1 && !isFirstLoad && (
-                        <Button
-                            label='Re-shuffle'
-                            clickHandler={resetRecordsHandler}
-                            color='rose'
-                        />
-                    )}
-                </div>
+            <section className='flex justify-center gap-x-4'>
+                {records && records.length > 0 && (
+                    <Button
+                        label={isFirstLoad ? 'Shuffle Records' : 'Next Record'}
+                        clickHandler={randomRecordHandler}
+                        color='sky'
+                    />
+                )}
+                {records && records.length <= 0 && !isFirstLoad && (
+                    <Button
+                        label='Re-Shuffle'
+                        clickHandler={resetRecordsHandler}
+                        color='rose'
+                    />
+                )}
             </section>
         </Fragment>
     );

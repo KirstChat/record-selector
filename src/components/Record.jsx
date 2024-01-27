@@ -6,7 +6,7 @@ const Record = ({ record, isLoading }) => {
     };
 
     return (
-        <section className='font-mono flex flex-col items-center justify-center text-slate-900 dark:text-white'>
+        <article className='font-mono flex flex-col items-center justify-center text-slate-900 dark:text-white'>
             <div className='relative aspect-square rounded-lg shadow-2xl shadow-gray-400 dark:shadow-gray-800 size-60'>
                 {(record.basic_information?.cover_image.includes('.gif') ||
                     isLoading) && (
@@ -42,7 +42,7 @@ const Record = ({ record, isLoading }) => {
                     </Fragment>
                 )}
             </div>
-        </section>
+        </article>
     );
 };
 

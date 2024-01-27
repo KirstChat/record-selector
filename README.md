@@ -13,3 +13,5 @@ Currently, two official plugins are available:
 -   Shuffle an Array - https://javascript.info/array-methods#shuffle-an-array
 -   CSS Loader - https://cssloaders.github.io/
 -   Favion Converter- https://favicon.io/favicon-converter/
+-   Maskable Editor - https://maskable.app/editor
+-   React Icons - https://react-icons.github.io/react-icons/
