@@ -81,8 +81,6 @@ const Records = () => {
         setIsFirstLoad(true);
     }, [data]);
 
-    console.log('records:', records);
-
     return (
         <Fragment>
             {!isFirstLoad && !isPending && records && (
