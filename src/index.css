@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Loader Styles */
 .loader {
     border: 5px solid;
     border-color: #fff #fff transparent;
@@ -32,7 +33,27 @@
     transform-origin: center center;
 }
 
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Swiper Styles */
 .swiper {
+    padding: 1.6rem 0;
     width: 100%;
 }
 
@@ -59,8 +80,8 @@
 .swiper-3d .swiper-slide-shadow-left {
     background-image: linear-gradient(
         to left,
-        rgba(229, 231, 235, 0.5),
-        rgba(229, 231, 235, 1)
+        rgba(229, 231, 235, 1),
+        rgba(229, 231, 235, 0.5)
     );
 }
 
@@ -80,8 +101,8 @@
     .swiper-3d .swiper-slide-shadow-left {
         background-image: linear-gradient(
             to left,
-            rgba(17, 24, 39, 0.5),
-            rgba(17, 24, 39, 1)
+            rgba(17, 24, 39, 1),
+            rgba(17, 24, 39, 0.5)
         );
     }
 
@@ -91,23 +112,5 @@
             rgba(17, 24, 39, 1),
             rgba(17, 24, 39, 0.5)
         );
-    }
-}
-
-@keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes rotationBack {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(-360deg);
     }
 }

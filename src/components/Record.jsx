@@ -1,13 +1,23 @@
-import { Fragment } from 'react';
+import { useEffect, useState } from 'react';
 
 const Record = ({ record, isLoading }) => {
+    const [fade, setFade] = useState(false);
+
     const removeUnwantedCharacters = (recordTitle) => {
         return recordTitle.replace(/[()0-9]/g, '');
     };
 
+    useEffect(() => {
+        setFade(isLoading ? false : true);
+    }, [isLoading]);
+
     return (
-        <article className='font-mono flex flex-col items-center justify-center text-slate-900 dark:text-white'>
-            <div className='relative aspect-square shadow-2xl shadow-gray-400 dark:shadow-gray-800 size-60'>
+        <article
+            className={`transition-all duration-200 ${
+                fade ? 'opacity-100' : 'opacity-0'
+            } font-mono flex flex-col items-center justify-center text-slate-900 dark:text-white`}
+        >
+            <div className='relative aspect-square rounded shadow-xl shadow-gray-400 dark:shadow-gray-800 size-60'>
                 {(record.basic_information?.cover_image.includes('.gif') ||
                     isLoading) && (
                     <div className='absolute animate-pulse bg-slate-500 dark:bg-slate-700 rounded size-full'></div>
