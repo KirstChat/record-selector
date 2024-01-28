@@ -5,15 +5,25 @@ import axios from 'axios';
 import Record from './Record';
 import Button from './Button';
 
+// Import Swiper React components and modules
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { A11y, EffectCoverflow, Keyboard, Pagination } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/a11y';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/keyboard';
+import 'swiper/css/pagination';
+
 const userName = import.meta.env.VITE_DISCOGS_USER_NAME;
 const folderId = import.meta.env.VITE_DISCOGS_COLLECITON_FOLDER_ID;
 const token = import.meta.env.VITE_DISCOGS_USER_TOKEN;
 
 const Records = () => {
-    const [records, setRecords] = useState();
-    const [randomRecord, setRandomRecord] = useState();
-    const [isFirstLoad, setIsFirstLoad] = useState(false);
+    const [isFirstLoad, setIsFirstLoad] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
+    const [records, setRecords] = useState();
 
     /**
      * Fetch records from Discogs API
@@ -37,92 +47,101 @@ const Records = () => {
     });
 
     /**
-     * Hook to shuffle records into a random order
+     * Function to shuffle records in a random order
      */
-    const shuffledRecords = useMemo(() => {
-        if (records && records.length > 0) {
-            for (let i = records.length - 1; i > 0; i--) {
+    const shuffleRecords = (releases) => {
+        if (releases && releases.length > 0) {
+            for (let i = releases.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
-                [records[i], records[j]] = [records[j], records[i]];
+                [releases[i], releases[j]] = [releases[j], releases[i]];
             }
 
-            return records;
+            setRecords(releases);
         }
-    }, [records]);
+    };
 
-    /**
-     * Click handler to setRandomRecord state
-     */
-    const randomRecordHandler = () => {
-        setRandomRecord(shuffledRecords.shift());
+    const shuffleHandler = () => {
+        shuffleRecords(data?.releases);
         setIsFirstLoad(false);
+
+        // Timeout function to add loader between records
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1500);
+    };
+
+    const reshuffleHandler = () => {
+        shuffleRecords(data?.releases);
         setIsLoading(true);
 
         // Timeout function to add loader between records
         setTimeout(() => {
             setIsLoading(false);
-        }, 1000);
+        }, 1500);
     };
-
-    /**
-     * Click handler to setRecords state when length is <= 0
-     */
-    const resetRecordsHandler = () => {
-        setRecords(structuredClone(data?.releases));
-        setIsFirstLoad(true);
-    };
-
-    /**
-     * Hook to setRecords state when data is available
-     * This creates a deep clone of the data
-     */
-    useEffect(() => {
-        setRecords(structuredClone(data?.releases));
-        setIsFirstLoad(true);
-    }, [data]);
 
     return (
         <Fragment>
-            {!isFirstLoad && !isPending && records && (
-                <section className='font-mono text-center mb-4'>
-                    <p className='text-slate-900 dark:text-white'>
-                        {`${data?.releases?.length - records?.length} /
-                        ${data?.releases?.length}`}
-                    </p>
+            {!isFirstLoad && isLoading && (
+                <div className='flex flex-col items-center justify-center py-4'>
+                    <span className='loader'></span>
+                </div>
+            )}
+
+            {!isPending && !error && !isLoading && (
+                <section className='flex flex-col justify-center -ml-4 -mr-4'>
+                    {!isFirstLoad && records && (
+                        <Fragment>
+                            <Swiper
+                                effect={'coverflow'}
+                                grabCursor={true}
+                                centeredSlides={true}
+                                slidesPerView={'auto'}
+                                coverflowEffect={{
+                                    rotate: 50,
+                                    stretch: 0,
+                                    depth: 100,
+                                    modifier: 1,
+                                    slideShadows: true,
+                                }}
+                                keyboard={true}
+                                pagination={{
+                                    type: 'fraction',
+                                }}
+                                modules={[
+                                    A11y,
+                                    EffectCoverflow,
+                                    Keyboard,
+                                    Pagination,
+                                ]}
+                            >
+                                {records.map((record) => (
+                                    <SwiperSlide>
+                                        <Record
+                                            key={record.id}
+                                            record={record}
+                                            isLoading={isLoading}
+                                        />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        </Fragment>
+                    )}
                 </section>
             )}
 
-            <section className='w-full'>
-                {isPending && (
-                    <div className='flex flex-col items-center justify-center py-4'>
-                        <span className='loader'></span>
-                    </div>
-                )}
-
-                {error && (
-                    <p className='text-center text-slate-900 dark:text-white'>
-                        There was a problem fetching your record collection from
-                        Discogs 😭
-                    </p>
-                )}
-
-                {!isPending && !error && !isFirstLoad && randomRecord && (
-                    <Record record={randomRecord} isLoading={isLoading} />
-                )}
-            </section>
-
-            <section className='flex justify-center gap-x-4'>
-                {records && records.length > 0 && (
+            <section className='flex justify-center'>
+                {isFirstLoad && (
                     <Button
-                        label={isFirstLoad ? 'Shuffle Records' : 'Next Record'}
-                        clickHandler={randomRecordHandler}
+                        label={`Shuffle Records`}
+                        clickHandler={shuffleHandler}
                         color='sky'
                     />
                 )}
-                {records && records.length <= 0 && !isFirstLoad && (
+                {!isFirstLoad && !isLoading && (
                     <Button
-                        label='Re-Shuffle'
-                        clickHandler={resetRecordsHandler}
+                        label={`Re-Shuffle Records`}
+                        clickHandler={reshuffleHandler}
                         color='rose'
                     />
                 )}

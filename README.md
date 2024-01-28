@@ -15,3 +15,4 @@ Currently, two official plugins are available:
 -   Favion Converter- https://favicon.io/favicon-converter/
 -   Maskable Editor - https://maskable.app/editor
 -   React Icons - https://react-icons.github.io/react-icons/
+-   SwiperJs - https://swiperjs.com/
