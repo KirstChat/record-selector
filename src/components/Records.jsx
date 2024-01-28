@@ -140,7 +140,7 @@ const Records = () => {
                 )}
                 {!isFirstLoad && !isLoading && (
                     <Button
-                        label={`Re-Shuffle Records`}
+                        label={`Re-Shuffle`}
                         clickHandler={reshuffleHandler}
                         color='rose'
                     />
