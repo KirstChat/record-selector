@@ -32,6 +32,68 @@
     transform-origin: center center;
 }
 
+.swiper {
+    width: 100%;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+}
+
+.swiper-pagination {
+    padding: 0 1.6rem 1.6rem;
+    position: relative;
+}
+
+.swiper-pagination-fraction {
+    color: #0f172a;
+}
+
+.swiper-3d .swiper-slide-shadow-left {
+    background-image: linear-gradient(
+        to left,
+        rgba(229, 231, 235, 0.5),
+        rgba(229, 231, 235, 1)
+    );
+}
+
+.swiper-3d .swiper-slide-shadow-right {
+    background-image: linear-gradient(
+        to right,
+        rgba(229, 231, 235, 1),
+        rgba(229, 231, 235, 0.5)
+    );
+}
+
+@media (prefers-color-scheme: dark) {
+    .swiper-pagination-fraction {
+        color: #fff;
+    }
+
+    .swiper-3d .swiper-slide-shadow-left {
+        background-image: linear-gradient(
+            to left,
+            rgba(17, 24, 39, 0.5),
+            rgba(17, 24, 39, 1)
+        );
+    }
+
+    .swiper-3d .swiper-slide-shadow-right {
+        background-image: linear-gradient(
+            to right,
+            rgba(17, 24, 39, 1),
+            rgba(17, 24, 39, 0.5)
+        );
+    }
+}
+
 @keyframes rotation {
     0% {
         transform: rotate(0deg);

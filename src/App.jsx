@@ -32,14 +32,14 @@ const App = () => {
                 </h1>
             </header>
 
-            <main className='mb-4'>
+            <main className='w-full'>
                 <Records />
                 {/* <ReactQueryDevtools initialIsOpen={false} /> */}
             </main>
 
             <footer className='flex font-mono justify-end relative text-slate-900 dark:text-white w-full'>
                 <button
-                    className='bg-emerald-700 rounded-full p-2 text-xl'
+                    className='bg-sky-700 rounded-full p-2 text-xl'
                     onClick={infoButtonHandler}
                 >
                     <span className='sr-only'>About Record Shuffler</span>
