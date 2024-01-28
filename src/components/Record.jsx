@@ -6,7 +6,7 @@ const Record = ({ record, isLoading }) => {
     };
 
     return (
-        <article className='font-mono flex flex-col items-center justify-center text-slate-900 dark:text-white pt-4'>
+        <article className='font-mono flex flex-col items-center justify-center text-slate-900 dark:text-white'>
             <div className='relative aspect-square shadow-2xl shadow-gray-400 dark:shadow-gray-800 size-60'>
                 {(record.basic_information?.cover_image.includes('.gif') ||
                     isLoading) && (
