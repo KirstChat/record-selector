@@ -72,13 +72,11 @@
     width: 100%;
 }
 
-.swiper-pagination {
-    position: absolute;
-    top: -0.4rem;
-}
-
 .swiper-pagination-fraction {
     color: #0f172a;
+    position: absolute;
+    top: 0;
+    height: fit-content;
 }
 
 .swiper-3d .swiper-slide-shadow-left {
