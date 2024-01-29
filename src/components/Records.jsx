@@ -4,17 +4,7 @@ import { api } from '../helpers/constants';
 import axios from 'axios';
 import Record from './Record';
 import Button from './Button';
-
-// Import Swiper React components and modules
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y, EffectCoverflow, Keyboard, Pagination } from 'swiper/modules';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/a11y';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/keyboard';
-import 'swiper/css/pagination';
+import Slider from './Slider';
 
 const userName = import.meta.env.VITE_DISCOGS_USER_NAME;
 const folderId = import.meta.env.VITE_DISCOGS_COLLECITON_FOLDER_ID;
@@ -81,51 +71,17 @@ const Records = () => {
     };
 
     return (
-        <Fragment>
+        <main className='w-full'>
             {!isFirstLoad && isLoading && (
                 <div className='flex flex-col items-center justify-center py-4'>
-                    <span className='loader'></span>
+                    <span className='loader aria-hidden'></span>
                 </div>
             )}
 
             {!isPending && !error && !isLoading && (
                 <section className='flex flex-col justify-center -ml-4 -mr-4'>
                     {!isFirstLoad && records && (
-                        <Fragment>
-                            <Swiper
-                                effect={'coverflow'}
-                                grabCursor={true}
-                                centeredSlides={true}
-                                slidesPerView={'auto'}
-                                coverflowEffect={{
-                                    rotate: 50,
-                                    stretch: 0,
-                                    depth: 100,
-                                    modifier: 1,
-                                    slideShadows: true,
-                                }}
-                                keyboard={true}
-                                pagination={{
-                                    type: 'fraction',
-                                }}
-                                modules={[
-                                    A11y,
-                                    EffectCoverflow,
-                                    Keyboard,
-                                    Pagination,
-                                ]}
-                            >
-                                {records.map((record) => (
-                                    <SwiperSlide>
-                                        <Record
-                                            key={record.id}
-                                            record={record}
-                                            isLoading={isLoading}
-                                        />
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        </Fragment>
+                        <Slider records={records} isLoading={isLoading} />
                     )}
                 </section>
             )}
@@ -146,7 +102,7 @@ const Records = () => {
                     />
                 )}
             </section>
-        </Fragment>
+        </main>
     );
 };
 
