@@ -5,7 +5,7 @@
 /* Loader Styles */
 .loader {
     border: 5px solid;
-    border-color: #fff #fff transparent;
+    border-color: #0f172a #0f172a transparent;
     border-radius: 50%;
     box-sizing: border-box;
     display: inline-block;
@@ -53,8 +53,12 @@
 
 /* Swiper Styles */
 .swiper {
-    padding: 1.6rem 0;
+    padding: 0.8rem 0;
     width: 100%;
+}
+
+.swiper-wrapper {
+    margin-top: 1.6rem;
 }
 
 .swiper-slide {
@@ -69,8 +73,8 @@
 }
 
 .swiper-pagination {
-    padding: 0 1.6rem 0.8rem;
-    position: relative;
+    position: absolute;
+    top: -0.4rem;
 }
 
 .swiper-pagination-fraction {
@@ -94,6 +98,10 @@
 }
 
 @media (prefers-color-scheme: dark) {
+    .loader {
+        border-color: #fff #fff transparent;
+    }
+
     .swiper-pagination-fraction {
         color: #fff;
     }

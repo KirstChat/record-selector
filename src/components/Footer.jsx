@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { FiInfo } from 'react-icons/fi';
 
 const Footer = () => {
-    const [isHidden, setIsHidden] = useState('hidden');
+    const [visibility, setVisibility] = useState(false);
 
     const infoButtonHandler = () => {
-        setIsHidden(isHidden === 'hidden' ? 'visible' : 'hidden');
+        setVisibility(visibility ? false : true);
     };
 
     return (
-        <footer className='absolute right-0 font-mono relative text-slate-900 dark:text-white'>
+        <footer className='absolute flex justify-end right-0 font-mono relative text-slate-900 dark:text-white w-full'>
             <button
-                className='bg-sky-700 rounded-full p-2 text-xl'
+                className='bg-slate-900 dark:bg-sky-700 rounded-full p-2 text-xl'
                 onClick={infoButtonHandler}
             >
                 <span className='sr-only'>About Record Shuffler</span>
@@ -19,10 +19,13 @@ const Footer = () => {
             </button>
 
             <div
-                className={`${isHidden} absolute right-1/2 bottom-full translate-x-1/2 mb-2 text-center text-xs w-full`}
+                className={`bg-gray-300 dark:bg-slate-950 border-2 border-slate-900 dark:border-white rounded py-2 px-4 flex flex-col gap-1 ${
+                    visibility ? 'opacity-100' : 'opacity-0'
+                } ${
+                    !visibility && 'pointer-events-none'
+                } translate-opacity duration-200 ease-in-out absolute right-1/2 bottom-full translate-x-1/2 mb-2 text-center text-xs w-full`}
             >
                 <a
-                    className='pb-2'
                     href='https://www.flaticon.com/free-icons/record-label'
                     title='record label icons'
                 >
