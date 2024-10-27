@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Records from './components/Records';
+import Footer from './components/Footer';
 
 const App = () => {
     // Create a client

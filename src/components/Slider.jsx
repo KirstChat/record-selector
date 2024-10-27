@@ -32,7 +32,7 @@ const Slider = ({ records, isLoading }) => {
                 <SwiperSlide>
                     {!isLoading && (
                         <Record
-                            key={record.id}
+                            key={`record-${record.id}`}
                             record={record}
                             isLoading={isLoading}
                         />
