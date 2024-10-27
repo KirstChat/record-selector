@@ -1,8 +1,7 @@
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../helpers/constants';
 import axios from 'axios';
-import Record from './Record';
 import Button from './Button';
 import Slider from './Slider';
 
@@ -89,14 +88,14 @@ const Records = () => {
             <section className='flex justify-center'>
                 {isFirstLoad && (
                     <Button
-                        label={`Shuffle Records`}
+                        label='Shuffle Records'
                         clickHandler={shuffleHandler}
                         color='sky'
                     />
                 )}
                 {!isFirstLoad && !isLoading && (
                     <Button
-                        label={`Re-Shuffle`}
+                        label='Re-Shuffle'
                         clickHandler={reshuffleHandler}
                         color='rose'
                     />
